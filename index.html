@@ -1,353 +1,921 @@
 <!DOCTYPE html>
-<html lang="zxx">
-
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- title -->
-    <title>Marc Aoun Portfolio</title>
-    <!-- favicon -->
-    <link rel="icon" type="image/png" sizes="32x32" href=".\asset\page\Marcfav.png">
-    <link rel="icon" type="image/png" sizes="16x16" href=".\asset\page\Marcfav.png">
-    <link rel="shortcut icon" href=".\asset\page\Marcfav.png">
-    <!-- metatag -->
-    <meta name="author" content="Marc Aoun" />
-    <meta property="og:title" content="Marc's Website" />
-    <meta property="og:url" content="" />
-    <meta property="og:image" content="" />
-    <meta property="og:description" content="WebMarc" />
-    <meta property="og:site_name" content="Marc's Website" />
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Marc's Website">
-    <meta name="twitter:description" content="Marc's Website">
-    <meta name="twitter:image" content="">
-    <meta id="tw_url" name="twitter:url" content="">
-    <!-- main style -->
-    <link href="css/main.css" rel="stylesheet">
-    <!-- responsive style -->
-    <link href="css/responsive.css" rel="stylesheet">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Marc Aoun</title>
+<meta name="description" content="Marc Aoun, software engineering student at Carleton University building computer vision and machine learning projects.">
+<meta name="author" content="Marc Aoun">
+<meta property="og:title" content="Marc Aoun">
+<meta property="og:description" content="Software engineering student at Carleton University building computer vision and machine learning projects.">
+<meta property="og:url" content="https://marcaounweb.github.io/">
+<meta name="theme-color" content="#15112E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2315112E'/%3E%3Cpath d='M7 13V7h6M19 7h6v6M25 19v6h-6M13 25H7v-6' stroke='%23FFE35A' stroke-width='3' fill='none'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,300..900&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#15112E;
+  --ink-2:#1D1840;
+  --line:#312A63;
+  --paper:#EEEAF8;
+  --mute:#A39CCB;
+  --cold:#5B4BFF;
+  --mag:#E8337A;
+  --amber:#FF8A2A;
+  --hot:#FFE35A;
+  --display:"Anybody","Arial Narrow",system-ui,sans-serif;
+  --body:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --pad:clamp(1.25rem,4vw,3.5rem);
+  --ease:cubic-bezier(.2,.7,.2,1);
+  color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:4.5rem}
+body{margin:0;background:var(--ink);color:var(--paper);font-family:var(--body);font-size:1.0625rem;line-height:1.6;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+a{color:inherit}
+img{max-width:100%}
+:focus-visible{outline:2px solid var(--hot);outline-offset:4px;border-radius:2px}
+::selection{background:var(--hot);color:var(--ink)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* buttons and links */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;font:inherit;font-weight:700;font-size:1rem;line-height:1.2;padding:.8rem 1.25rem;border:2px solid var(--hot);background:var(--hot);color:var(--ink);text-decoration:none;cursor:pointer;transition:background .25s,color .25s,border-color .25s,transform .15s}
+.btn:hover{background:transparent;color:var(--hot)}
+.btn:active{transform:translateY(1px)}
+.btn.ghost{background:transparent;color:var(--paper);border-color:var(--line)}
+.btn.ghost:hover{border-color:var(--hot);color:var(--hot)}
+.btn[disabled]{opacity:.45;cursor:not-allowed;pointer-events:none}
+.ul{text-decoration:none;border-bottom:1px solid var(--mute);padding-bottom:1px;transition:color .25s,border-color .25s}
+.ul:hover{color:var(--hot);border-color:var(--hot)}
+.row{display:flex;flex-wrap:wrap;gap:.75rem 1.5rem;align-items:center}
+
+/* nav */
+.nav{position:fixed;inset:0 0 auto 0;z-index:30;display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:1.1rem var(--pad);mix-blend-mode:difference;color:#fff}
+.nav a{text-decoration:none}
+.brand{font-family:var(--display);font-weight:800;font-variation-settings:"wdth" 130;font-size:1.05rem;letter-spacing:-.01em;white-space:nowrap}
+.nav ul{display:flex;gap:clamp(.85rem,2.2vw,1.9rem);list-style:none;margin:0;padding:0;font-size:.95rem}
+.nav ul a{position:relative;padding:.2rem 0}
+.nav ul a::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform .35s var(--ease)}
+.nav ul a:hover::after,.nav ul a:focus-visible::after{transform:scaleX(1)}
+
+/* hero */
+.hero{position:relative;height:100vh;height:100svh;min-height:560px;overflow:hidden}
+#field{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:pan-y;cursor:crosshair}
+.detect{position:absolute;left:0;top:0;width:0;height:0;pointer-events:none;opacity:0;transition:opacity .7s ease}
+.detect.on{opacity:1}
+.detect i{position:absolute;width:20px;height:20px;border:2px solid var(--hot)}
+.detect i:nth-child(1){left:0;top:0;border-right:0;border-bottom:0}
+.detect i:nth-child(2){right:0;top:0;border-left:0;border-bottom:0}
+.detect i:nth-child(3){right:0;bottom:0;border-left:0;border-top:0}
+.detect i:nth-child(4){left:0;bottom:0;border-right:0;border-top:0}
+.tag{position:absolute;left:0;bottom:100%;margin-bottom:6px;background:var(--hot);color:var(--ink);font-family:var(--display);font-weight:700;font-variation-settings:"wdth" 85;font-size:.82rem;line-height:1;padding:.32rem .5rem .28rem;white-space:nowrap;font-variant-numeric:tabular-nums}
+.hero-foot{position:absolute;left:0;right:0;bottom:0;display:flex;justify-content:space-between;align-items:flex-end;gap:2rem;padding:0 var(--pad) clamp(1.4rem,4.5vh,2.75rem);pointer-events:none}
+.hero-foot>div:first-child{pointer-events:auto}
+.hero-foot p{margin:0 0 1.2rem;max-width:36ch;font-size:clamp(1.02rem,1.35vw,1.2rem);line-height:1.5}
+.hud{display:flex;gap:1.1rem;font-family:var(--display);font-variation-settings:"wdth" 80;font-size:.85rem;color:var(--mute);font-variant-numeric:tabular-nums;white-space:nowrap}
+.rec::before{content:"";display:inline-block;width:.5rem;height:.5rem;border-radius:50%;background:var(--mag);margin-right:.45rem;vertical-align:.04em;animation:blink 1.6s steps(2,start) infinite}
+@keyframes blink{to{opacity:.15}}
+
+/* sections */
+.block{max-width:1280px;margin:0 auto;padding:clamp(5rem,11vw,8.5rem) var(--pad) 0}
+.block>h2{font-family:var(--display);font-weight:800;font-variation-settings:"wdth" 125;font-size:clamp(2.4rem,6.2vw,4.9rem);line-height:.95;letter-spacing:-.02em;margin:0 0 clamp(2.25rem,5vw,4rem)}
+.block>h2+.intro{margin:calc(-1 * clamp(1rem,3vw,2.5rem)) 0 clamp(2rem,4vw,3rem);max-width:52ch;font-size:clamp(1.05rem,1.4vw,1.2rem);color:var(--mute)}
+.sub{font-family:var(--display);font-weight:800;font-variation-settings:"wdth" 120;font-size:clamp(1.6rem,3vw,2.4rem);line-height:1;margin:clamp(3.5rem,7vw,5.5rem) 0 1.5rem}
+
+/* now */
+.now{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2rem clamp(2rem,4vw,3.5rem);margin:0}
+.now>div{border-top:2px solid var(--cold);padding-top:1.1rem}
+.now>div:nth-child(2){border-color:var(--mag)}
+.now>div:nth-child(3){border-color:var(--amber)}
+.now dt{font-family:var(--display);font-weight:800;font-variation-settings:"wdth" 115;font-size:1.45rem;line-height:1.1;margin:0 0 .6rem}
+.now dd{margin:0;max-width:40ch}
+.now dd a{margin-top:.8rem;display:inline-block}
+
+/* work */
+.project{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(1.5rem,4vw,4.5rem);padding:clamp(2rem,4vw,3.25rem) 0;border-top:1px solid var(--line)}
+.project.last{border-bottom:1px solid var(--line)}
+.project h3{font-family:var(--display);font-weight:800;font-size:clamp(2.3rem,5.2vw,4.2rem);line-height:.92;letter-spacing:-.015em;margin:0 0 1.1rem;font-variation-settings:"wdth" 95;transition:font-variation-settings .6s var(--ease),color .3s ease}
+.project:hover h3{font-variation-settings:"wdth" 140;color:var(--hot)}
+.project.small h3{font-size:clamp(1.7rem,3.2vw,2.5rem)}
+.project.small:hover h3{font-variation-settings:"wdth" 125}
+.what{margin:0 0 1rem;font-size:1.12rem;max-width:34ch}
+.stack{margin:0;color:var(--mute);font-size:.95rem;max-width:40ch}
+.points{list-style:none;margin:0;padding:0;display:grid;gap:.9rem}
+.points li{position:relative;padding-left:1.4rem;max-width:62ch}
+.points li::before{content:"";position:absolute;left:0;top:.62em;width:.45rem;height:.45rem;background:var(--cold);transition:background .3s ease}
+.project:hover .points li::before{background:var(--amber)}
+.project .row{margin-top:1.6rem}
+.project p.body{margin:0;max-width:62ch}
+
+
+/* project gallery */
+.gallery{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1.97fr) minmax(0,1.2fr);gap:clamp(.75rem,1.5vw,1.25rem);margin:clamp(.5rem,2vw,1.25rem) 0 0}
+.gallery figure{margin:0}
+.gallery a{display:block;position:relative;overflow:hidden;background:var(--ink-2)}
+.gallery img{display:block;width:100%;height:auto;transition:transform .8s var(--ease)}
+.gallery a:hover img{transform:scale(1.025)}
+.gallery a::after{content:"";position:absolute;inset:0;border:2px solid transparent;transition:border-color .3s}
+.gallery a:hover::after,.gallery a:focus-visible::after{border-color:var(--hot)}
+.gallery figcaption{margin-top:.6rem;color:var(--mute);font-size:.92rem;max-width:52ch}
+@media (max-width:700px){.gallery{grid-template-columns:1fr}}
+
+/* video facade */
+.yt{position:relative;display:block;width:100%;aspect-ratio:16/9;border:0;padding:0;margin:0 0 1.25rem;background:var(--ink-2);cursor:pointer;overflow:hidden}
+.yt img{display:block;width:100%;height:100%;object-fit:cover;filter:url(#thermal);transition:filter .6s ease,transform .8s var(--ease)}
+.yt:hover img,.yt:focus-visible img{filter:none;transform:scale(1.02)}
+.yt .play{position:absolute;left:1rem;bottom:1rem;background:var(--hot);color:var(--ink);font-weight:700;padding:.55rem .9rem;display:inline-flex;gap:.5rem;align-items:center}
+.yt .play::before{content:"";width:0;height:0;border-left:.7em solid currentColor;border-top:.42em solid transparent;border-bottom:.42em solid transparent}
+.yt-frame{display:block;width:100%;aspect-ratio:16/9;border:0;margin:0 0 1.25rem;background:#000}
+
+/* demo */
+.demo{display:grid;grid-template-columns:minmax(0,8fr) minmax(0,4fr);gap:clamp(1.5rem,3vw,2.5rem);align-items:start}
+.stage{position:relative;aspect-ratio:16/9;background:var(--ink-2);overflow:hidden}
+.stage video,.stage canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.stage video{transform:scaleX(-1);object-fit:cover}
+.stage .frame{opacity:1;inset:14px;width:auto;height:auto;left:14px;top:14px;right:14px;bottom:14px}
+.stage .frame i{border-color:var(--line)}
+.stage.live .frame i{border-color:var(--hot)}
+.idle{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:2rem;color:var(--mute)}
+.idle strong{display:block;font-family:var(--display);font-weight:800;font-variation-settings:"wdth" 115;font-size:clamp(1.3rem,2.5vw,1.9rem);color:var(--paper);line-height:1.1;margin-bottom:.4rem}
+.stage.live .idle{display:none}
+.side .row{margin-bottom:1.25rem}
+.status{margin:0 0 1.25rem;color:var(--mute);min-height:1.6em}
+.status.err{color:var(--mag)}
+.logh{font-family:var(--display);font-weight:700;font-variation-settings:"wdth" 110;font-size:1.1rem;margin:0 0 .6rem}
+.log{list-style:none;margin:0;padding:0;border-top:1px solid var(--line);max-height:17rem;overflow:auto}
+.log li{display:grid;grid-template-columns:auto 1fr auto;gap:.75rem;padding:.5rem 0;border-bottom:1px solid var(--line);font-size:.95rem;font-variant-numeric:tabular-nums}
+.log time{color:var(--mute)}
+.log .cls{font-weight:700}
+.log .person{color:var(--hot)}
+.log .other{color:#9D8CFF}
+.log .empty{grid-template-columns:1fr;color:var(--mute)}
+.note{margin:1rem 0 0;color:var(--mute);font-size:.92rem;max-width:46ch}
+
+/* experience */
+.xp{list-style:none;margin:0;padding:0}
+.xp li{display:grid;grid-template-columns:12rem minmax(0,1fr);gap:.5rem 3rem;padding:1.8rem 0;border-top:1px solid var(--line)}
+.xp li:last-child{border-bottom:1px solid var(--line)}
+.xp time{color:var(--mute);font-variant-numeric:tabular-nums;padding-top:.2rem}
+.xp h3{font-family:var(--display);font-weight:700;font-variation-settings:"wdth" 112;font-size:clamp(1.35rem,2.4vw,1.85rem);line-height:1.1;margin:0}
+.xp .org{color:var(--mute);margin:.25rem 0 .8rem}
+.xp ul{margin:0;padding:0;list-style:none;display:grid;gap:.5rem}
+.xp ul li{display:block;border:0;padding:0 0 0 1.2rem;position:relative;max-width:66ch}
+.xp ul li::before{content:"";position:absolute;left:0;top:.65em;width:.4rem;height:.4rem;background:var(--line)}
+
+/* about */
+.about{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,7fr);gap:clamp(2rem,6vw,5.5rem);align-items:start}
+.face{position:relative;margin:2rem 0 0;padding:14px}
+.face .detect{opacity:1;width:100%;height:100%}
+.face img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover;background:var(--ink-2);filter:url(#thermal);transition:filter .8s ease}
+.face:hover img{filter:none}
+.about-text p{margin:0 0 1.2rem;font-size:clamp(1.1rem,1.5vw,1.3rem);line-height:1.55;max-width:44ch}
+.facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.75rem 3rem;margin:2.5rem 0 0}
+.facts dt,.kit dt{font-family:var(--display);font-weight:700;font-variation-settings:"wdth" 110;font-size:1.15rem;margin:0 0 .35rem}
+.facts dd,.kit dd{margin:0;color:var(--mute)}
+
+/* toolkit */
+.kit{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2.25rem 4rem;margin:0}
+.kit dd{color:var(--paper);max-width:48ch}
+
+/* contact */
+.contact{padding-bottom:clamp(4rem,9vw,7rem)}
+.contact .lead{margin:0 0 1.5rem;font-size:clamp(1.1rem,1.5vw,1.3rem);max-width:44ch}
+.mail{display:inline-block;font-family:var(--display);font-weight:800;font-size:clamp(1.7rem,6.2vw,5.4rem);line-height:1.05;letter-spacing:-.02em;text-decoration:none;font-variation-settings:"wdth" 72;overflow-wrap:anywhere;transition:font-variation-settings .7s var(--ease),color .3s ease}
+.mail:hover,.mail:focus-visible{font-variation-settings:"wdth" 100;color:var(--hot)}
+.contact .row{margin-top:2.25rem}
+footer{max-width:1280px;margin:0 auto;padding:1.5rem var(--pad) 2rem;display:flex;justify-content:space-between;gap:1rem;color:var(--mute);font-size:.9rem;border-top:1px solid var(--line)}
+footer a{text-decoration:none}
+footer a:hover{color:var(--hot)}
+
+@media (max-width:900px){
+  .project,.about,.xp li,.demo{grid-template-columns:1fr}
+  .now{grid-template-columns:1fr}
+  .xp li{gap:.25rem}
+  .face{max-width:380px;margin-top:0}
+  .hero-foot{flex-direction:column;align-items:flex-start;gap:1rem}
+}
+@media (max-width:560px){
+  .nav .opt{display:none}
+  .kit,.facts{grid-template-columns:1fr}
+  .hud .opt{display:none}
+  .hero-foot .btn{padding:.7rem 1rem}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{transition:none!important;animation:none!important}
+}
+</style>
 </head>
-
 <body>
-    <!-- header -->
-    <header id="headermain">
-        <div class="container">
-            <div class="row headerwrap">
-                <div class="col-xs-12 col-md-12 col-lg-2">
-                    <!-- wrap logo -->
-                    <div class="headerwrap__logo">
-                        <img src="./asset/page/marclogo4.png" alt="logo" class="img-fluid" />
-                    </div>
-                    <!-- end wrap logo -->
-                    <!-- navigation icon  -->
-                    <div class="navicon d-block d-lg-none">
-                        <div class="navicon__bar"></div>
-                    </div>
-                    <!-- end navigation icon  -->
-                </div>
-                <div class="col-lg-10 text-xl-left d-none d-lg-block justify-content-lg-left justify-content-xl-left">
-                    <!-- navigation desktop -->
-                    <nav class="navpage text-left">
-                        <ul class="navpage__wrap">
-                            <li class="navpage__list"><a href="#sectionhero" class="activelink">Intro.</a></li>
-                            <li class="navpage__list"><a href="#aboutsection">About Me.</a></li>
-                            <li class="navpage__list"><a href="#servicesection">Skills.</a></li>
-                            <li class="navpage__list"><a href="#portfoliosection">Portfolio.</a></li> 
-                            <li class="navpage__list"><a href="#portfoliosection">Projects.</a></li>                      
-                            <li class="navpage__list"><a href="#contactsection">Contact.</a></li>
-                        </ul>
-                    </nav>
-                    <!-- end navigation desktop -->
-                </div>
-            </div>
-        </div>
-    </header>
-    <!-- end header -->
-    <!-- mobile nav -->
-    <div class="overlay">
-        <div class="overlay__navigation">
-            <ul class="overlay__listnav">
-                <li class="navpage__list"><a href="#herosection">Intro.</a></li>
-                <li><a href="#aboutsection">About Me.</a></li>
-                <li><a href="#servicesection">Skills.</a></li>
-                <li><a href="#portfoliosection">Portfolio.</a></li>
-                <li><a href="#portfoliosection">Projects.</a></li>
-                <li><a href="#contactsection">Contact.</a></li>
-            </ul>
-        </div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <filter id="thermal" color-interpolation-filters="sRGB">
+    <feColorMatrix type="matrix" values=".3 .59 .11 0 0  .3 .59 .11 0 0  .3 .59 .11 0 0  0 0 0 1 0"/>
+    <feComponentTransfer>
+      <feFuncR type="table" tableValues=".082 .294 .608 .910 1 1 1"/>
+      <feFuncG type="table" tableValues=".067 .235 .184 .200 .541 .890 1"/>
+      <feFuncB type="table" tableValues=".180 .941 .816 .478 .165 .353 1"/>
+    </feComponentTransfer>
+  </filter>
+</svg>
+
+<nav class="nav" aria-label="Main">
+  <a class="brand" href="#top">Marc Aoun</a>
+  <ul>
+    <li><a href="#work">Work</a></li>
+    <li class="opt"><a href="#demo">Demo</a></li>
+    <li class="opt"><a href="#experience">Experience</a></li>
+    <li class="opt"><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="Marc_Aoun_Resume.pdf" target="_blank" rel="noopener">Resume</a></li>
+  </ul>
+</nav>
+
+<header class="hero" id="top">
+  <h1 class="sr">Marc Aoun</h1>
+  <canvas id="field" aria-hidden="true"></canvas>
+  <div class="detect" id="heroBox" aria-hidden="true"><i></i><i></i><i></i><i></i><span class="tag">marc_aoun 0.99</span></div>
+  <div class="hero-foot">
+    <div>
+      <p>Software engineering student at Carleton University, building computer vision and machine learning systems that run on small hardware.</p>
+      <div class="row">
+        <a class="btn" href="#demo">Try the live detector</a>
+        <a class="btn ghost" href="Marc_Aoun_Resume.pdf" download>Download resume</a>
+      </div>
     </div>
-    <!-- end mobile nav -->
-    <!-- PRELOADER -->
-    <div class="preloader">
-        <div class="preloader__img">
-            <img src="./asset/page/marclogo4.png" alt="logopage" class="img-fluid" />
-        </div>
+    <div class="hud" aria-hidden="true">
+      <span class="rec">live</span>
+      <span id="fps">60 fps</span>
+      <span class="opt" id="pts">0 points</span>
     </div>
-    <!-- main wrap -->
-    <main id="mainwrap">
-        <!-- section hero -->
-        <div id="sectionhero" class="sectionblock">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6 pr-0 mr-0 pl-lg-0 pr-lg-5 mr-lg-0 mt-3 mt-lg-0 align-items-center justify-content-center align-items-lg-left justify-content-lg-left text-center text-lg-left d-flex order-1 order-lg-0 ">
-                        <div class="infohero ">
-                            <p class="infohero__p">Hello, I'm</p>
-                            <h1 class="infohero__title">Marc
-                                <span>Aoun</span>
-                            </h1>
-                            <span id="typed-text"></span>
-                            <span class="cursor blink">&nbsp;</span>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 text-center order-0 order-lg-1 mb-5 mb-lg-0">
-                        <div class="heroimg">
-                            <img src="./asset/hero/Selfie.jpg" alt="poto" class="img-fluid heroimg__poto" />
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-                <path fill="#ffffff" fill-opacity="1" d="M0,128L60,149.3C120,171,240,213,360,192C480,171,600,85,720,85.3C840,85,960,171,1080,197.3C1200,224,1320,192,1380,176L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path>
-              </svg>
+  </div>
+</header>
+
+<main>
+  <section class="block" id="now">
+    <h2>Right now</h2>
+    <dl class="now">
+      <div>
+        <dt>Building a handwriting model</dt>
+        <dd>Training a model on samples of my own handwriting so it can write new text that looks like I wrote it, with inference running on a Raspberry Pi 5.</dd>
+      </div>
+      <div>
+        <dt>Running AI workshops</dt>
+        <dd>A Carleton AI Society series that goes from intro to AI, to machine learning, to deep learning. The first one is on October 6, 8 to 9 pm.
+          <br><a class="ul" href="https://linktr.ee/carletonaisociety" target="_blank" rel="noopener">CAIS links and sign-ups</a></dd>
+      </div>
+      <div>
+        <dt>Rebranding CAIS</dt>
+        <dd>Helping give the Carleton AI Society a new identity, from the logo to the workshop promos.
+          <br><a class="ul" href="https://www.instagram.com/carletonaisociety/" target="_blank" rel="noopener">@carletonaisociety</a></dd>
+      </div>
+    </dl>
+  </section>
+
+  <section class="block" id="work">
+    <h2>Selected work</h2>
+
+    <article class="project">
+      <div>
+        <h3>Sentinel AI</h3>
+        <p class="what">A Raspberry Pi doorbell camera that recognizes faces, unlocks for people it knows, and flags packages at the door.</p>
+        <p class="stack">Python, PyQt5, OpenCV, YOLOv8, face_recognition, OpenAI Realtime API, Raspberry Pi 5</p>
+      </div>
+      <div>
+        <ul class="points">
+          <li>Nine-module Python app covering capture, object detection, face recognition, notifications, and a voice assistant powered by the OpenAI Realtime API.</li>
+          <li>Unknown visitors get flagged and can be enrolled on the spot, so the known-faces database grows as people show up.</li>
+          <li>PyQt5 desktop app with a live feed, face enrollment, colour-coded detection logs, and a settings panel. Camera processing runs on background threads so the UI never stalls.</li>
+          <li>Capture layer works with both the Pi Camera and USB webcams, with a setup script for one-command install. Wired a 2-inch Waveshare LCD over GPIO that shows an animated face, and developed remotely over SSH and VNC.</li>
+        </ul>
+        <div class="row">
+          <a class="btn" href="https://github.com/MarcAoun/sentinel_ai" target="_blank" rel="noopener">View the code</a>
+          <a class="btn ghost" href="#demo">Try detection in your browser</a>
         </div>
-        <!-- end section hero -->
-        <!-- about section -->
-        <div id="aboutsection" class="sectionblock">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-4 text-center text-lg-left">
-                        <div class="abouthero">
-                            <h3>About me</h3>
-                            <img src="IMG-7645.JPG" alt="poto" class="img-fluid heroimg__poto" width = "200">
-                        </div>
-                    </div>
-                    <div class="col-lg-8 pl-lg-5 text-center text-lg-left">
-                        <div class="infoabout">
-                            <p class="infoabout__title, cool_effect">
-                                Hi there! I'm a dedicated software engineering university student, always striving to improve my skills and knowledge. I'm passionate about programming and committed to becoming a successful software engineer who will be making valuable contributions to the tech industry.                            <div class="row  text-center text-lg-left">
-                                <div class="col-lg-6">
-                                    <ul class="infoabout__list">
-                                        <li>
-                                            <div class="infoabout__wrap">
-                                                
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="infoabout__wrap">
-                                                <span class="mt-4 mb-2 d-block infoabout__title">EMAIL ADDRESS</span>
-                                                <p>
-                                                    marcaoun10@gmail.com
-                                                </p>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="infoabout__wrap">
-                                                <span class="mt-4 mb-2 d-block infoabout__title">PHONE NUMBER</span>
-                                                <p>
-                                                    613-869-4608
-                                                </p>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                        
-                                </div>
-                                <a href="Resume6.pdf" target = "_blank" class="btn linkbtn aboutlink mt-4">
-                                    Open CV
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                
-                </div>
-            </div>
+      </div>
+      <div class="gallery">
+        <figure>
+          <a href="sentinel-app.jpg" target="_blank" rel="noopener" aria-label="Open the Sentinel AI app screenshot full size">
+            <img src="sentinel-app.jpg" alt="Sentinel AI desktop app showing a live camera feed with a face box labelled marc 70%, next to the voice assistant panel" width="1600" height="814" loading="lazy">
+          </a>
+          <figcaption>The PyQt5 app recognizing me live, with the voice assistant panel on the right.</figcaption>
+        </figure>
+        <figure>
+          <a href="sentinel-hardware.jpg" target="_blank" rel="noopener" aria-label="Open the Sentinel AI hardware photo full size">
+            <img src="sentinel-hardware.jpg" alt="Raspberry Pi 5 with an active cooler, a camera module on a ribbon cable, a speaker, and a 2-inch LCD showing animated eyes" width="952" height="795" loading="lazy">
+          </a>
+          <figcaption>The hardware: Pi 5, camera module, speaker, and the 2-inch LCD running Sentinel's face.</figcaption>
+        </figure>
+      </div>
+    </article>
 
+    <article class="project last">
+      <div>
+        <h3>UNO</h3>
+        <p class="what">A playable desktop UNO game in Java, built as a team project.</p>
+        <p class="stack">Java, Swing, MVC, event-driven design</p>
+      </div>
+      <div>
+        <ul class="points">
+          <li>Model-View-Controller architecture with a Swing interface, custom event objects pushing model changes to the view, and swappable light and dark card sets.</li>
+          <li>Designed and built Timed Mode end to end: a per-turn countdown that ends the turn when it runs out, touching the menu, controller timer, model state, and the live countdown in the view.</li>
+          <li>Kept timer state in the model so game logic stayed independent of the UI across each milestone.</li>
+        </ul>
+        <div class="row">
+          <a class="btn" href="https://github.com/MarcAoun/SYSC3110_Uno_M5" target="_blank" rel="noopener">View the code</a>
         </div>
-        <!-- end about -->
-        <!-- service section -->
-        <div id="servicesection" class="sectionblock">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-                <path fill="#ffffff" fill-opacity="1" d="M0,96L60,117.3C120,139,240,181,360,186.7C480,192,600,160,720,138.7C840,117,960,107,1080,117.3C1200,128,1320,160,1380,176L1440,192L1440,0L1380,0C1320,0,1200,0,1080,0C960,0,840,0,720,0C600,0,480,0,360,0C240,0,120,0,60,0L0,0Z"></path>
-              </svg>
-            <div class="container">
-                <div>
-                    
-                    <div class="abouthero">
-                        <center><h3>Skills</h3></center>
-                    </div>                       
-                    
+      </div>
+    </article>
 
-                    <div class="col-lg-12">
-                        <div id="sliderservice" class="sliderservice__contentinner keen-slider">
-                            <div class="wrapservice keen-slider__slide text-center text-lg-left">
-                                <i class="fa-solid fa-compass-drafting"></i>
-                                <h3 class="mt-3 wrapservice__title"> Hardworking</h3>
-                                <p>I am extremely dedicated and hardworking, always striving to give my best effort in everything I do.</p>
-                            </div>
-                            <div class="wrapservice keen-slider__slide text-center text-lg-left">
-                                <i class="fa-solid fa-bullhorn"></i>
-                                <h3 class="mt-3 wrapservice__title">Communication</h3>
-                                <p>As someone who values teamwork and enjoys collaborating with coworkers, I consider myself a very social and team-oriented individual.</p>
-                            </div>
-                            <div class="wrapservice keen-slider__slide text-center text-lg-left">
-                                <i class="fa-solid fa-cubes"></i>
-                                <h3 class="mt-3 wrapservice__title"> Problem Solving</h3>
-                                <p>I believe that I am skilled in problem-solving, and I enjoy finding creative solutions to challenges that arise.</p>
-                            </div>
-                            <div class="wrapservice keen-slider__slide text-center text-lg-left">
-                                <i class="fa-solid fa-cubes"></i>
-                                <h3 class="mt-3 wrapservice__title"> Quick Learner</h3>
-                                <p>I have always been a quick learner, able to pick up new skills and concepts with ease.</p>
-                            </div>
-                        </div>
+    <h3 class="sub">Games and earlier builds</h3>
 
-                    </div>
-                </div>
-            </div>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#ffffff" fill-opacity="1" d="M0,96L60,117.3C120,139,240,181,360,197.3C480,213,600,203,720,186.7C840,171,960,149,1080,160C1200,171,1320,213,1380,234.7L1440,256L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path></svg>
+    <article class="project small">
+      <div>
+        <h3>Five Nights at Springtrap's</h3>
+        <p class="stack">Unity, C#</p>
+      </div>
+      <div>
+        <button class="yt" type="button" data-id="DbZMN5v5umE" aria-label="Play the Five Nights at Springtrap's gameplay video">
+          <img src="https://i.ytimg.com/vi/DbZMN5v5umE/hqdefault.jpg" alt="" loading="lazy">
+          <span class="play">Play gameplay video</span>
+        </button>
+        <p class="body">A survival horror game where you're the night guard in an abandoned restaurant, fending off animatronics for five nights. The hard part was tuning the enemy AI so it felt tough but fair, then chasing down bugs until the jumpscares landed right.</p>
+      </div>
+    </article>
+
+    <article class="project small">
+      <div>
+        <h3>Choice Adventure 2</h3>
+        <p class="stack">Python, Tkinter</p>
+      </div>
+      <div>
+        <p class="body">A choose-your-path game about escaping an island, where every decision changes what happens next. One of the first things I built in Python, and where I learned to plan code before writing it.</p>
+        <div class="row">
+          <a class="btn ghost" href="Choice_Adventure2.zip" download>Download the game (.zip)</a>
         </div>
-        <!-- end service section -->
-        <!-- portfolio section -->
-        <div id="portfoliosection" class="sectionblock">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12 text-center">
-                        <!-- filter portfolio -->
-                        <div class="warpfilter text-left">
-                            <ul id="filterwrap" class="warpfilter__filter justify-content-left text-center text-lg-left">
-                                <div class="abouthero">
-                                    <center><h3 style="margin: 50px;">Education & Work Record</h3></center>
+      </div>
+    </article>
 
-                                    <center><div class="row">
-                                        <div class="col-lg-6">
-                                            <h5 class="sub-title-timeline"><i class="fas fa-graduation-cap"></i> Education</h5>
-                                            <div class="timeline">
-                                                <div class="column">
-                                                    <div class="title">
-                                                        <h2>BEng in Software Engineering</h2>
-                                                    </div>
-                                                    <div class="description">
-                                                        <p>Carleton University</p>
-                                                        <h6 style="color: red;"><i class="fas fa-calendar-alt"></i> 2022 - 2027</h6>
-                                                        <p> <br /> </p>
-                                                    </div>
-                                                </div>
-                                                <div class="column">
-                                                    <div class="title">
-                                                        <h2>High School Degree</h2>
-                                                    </div>
-                                                    <div class="description">
-                                                        <p>Garneau</p>
-                                                        <h6 style="color: red;"><i class="fas fa-calendar-alt"> </i> 2016 - 2022</h6>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                        
-                                        <div class="col-lg-6 mt-lg-0 mt-4">
-                                            <h5 class="sub-title-timeline"><i class="fas fa-briefcase"></i> Experience</h5>
-                                            <div class="timeline">
-                                                <div class="column">
-                                                    <div class="title">
-                                                        <h2> Inside Worker </h2>
-                                                    </div>
-                                                    <div class="description">
-                                                        <p>Domino's Pizza</p>
-                                                        <h6 style="color: red;"><i class="fas fa-calendar-alt"></i> 2020 - 2021</h6>
-                                                        <p> <br /> </p>
-                                                    </div>
-                                                </div>
-                                                <div class="column">
-                                                    <div class="title">
-                                                        <h2>Assistant</h2>
-                                                    </div>
-                                                    <div class="description">
-                                                        <p>Chady's Renovation</p>
-                                                        <h6 style="color: red;"><i class="fas fa-calendar-alt"></i> 2020 - 2020</h6>
-                                                    </div>
-                                                </div>
-                                                
-                                            </div>
-                                        </div>
-                                    </center>
-                                    </div>
-                                
-                                </div>      
-                                
-
-                            </ul>
-                        </div>
-                        
-                    </div>
-                </div>
-            </div>
+    <article class="project small last">
+      <div>
+        <h3>Chady's Construction</h3>
+        <p class="stack">Client website</p>
+      </div>
+      <div>
+        <p class="body">A website for a local renovation company, covering their services and how to reach them.</p>
+        <div class="row">
+          <a class="btn ghost" href="http://www.chadysconstruction.ca" target="_blank" rel="noopener">Visit the site</a>
         </div>
+      </div>
+    </article>
+  </section>
 
-        <div id="servicesection" class="sectionblock">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-                <path fill="#ffffff" fill-opacity="1" d="M0,96L60,117.3C120,139,240,181,360,186.7C480,192,600,160,720,138.7C840,117,960,107,1080,117.3C1200,128,1320,160,1380,176L1440,192L1440,0L1380,0C1320,0,1200,0,1080,0C960,0,840,0,720,0C600,0,480,0,360,0C240,0,120,0,60,0L0,0Z"></path>
-              </svg>
-            <div class="container">
-                <div>
-                    
-                    <div class="abouthero">
-                        <center><h3>Projects</h3><center>
-                    </div>                       
-                    
-                 
-                    <div class="col-lg-12">
-                        <div id="sliderservice" class="sliderservice__contentinner keen-slider">
-                            <div class="wrapservice keen-slider__slide text-center">
-                               
-                                <a href="game.html" class="mt-3 wrapservice__title, btn linkbtn aboutlink mt-4"> Game development</a>
-                                <p>Here are a few games I developed using Unity (C#) and Python</p>
-                            </div>
-                            <div class="wrapservice keen-slider__slide text-center">
-                                <a target = "_blank" href="http://www.chadysconstruction.ca" class="mt-3 wrapservice__title,  btn linkbtn aboutlink mt-4">Website Developement</a>
-                                <p>This is not the only website I have made. Click on the button to access the website I built for Chady's Construction Inc.</p>
-                            </div>
-                            <div class="wrapservice keen-slider__slide text-center">
-                                <h3 class="mt-3 wrapservice__title,  btn linkbtn aboutlink mt-4"> More coming soon...</h3>
-                                <p>Hire me to help expand my knowledge on coding!</p>
-                                
-                            </div>
+  <section class="block" id="demo">
+    <h2>Live detector</h2>
+    <p class="intro">The same idea behind Sentinel AI, running in your browser. It uses COCO-SSD, a small object detection model, on your webcam. Nothing is uploaded; every frame stays on your device.</p>
+    <div class="demo">
+      <div class="stage" id="stage">
+        <video id="cam" playsinline muted></video>
+        <canvas id="overlay"></canvas>
+        <div class="detect frame" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+        <div class="idle"><div><strong>Camera is off</strong>Start the camera to see what the model picks up. Try holding up a phone, cup, or book.</div></div>
+      </div>
+      <div class="side">
+        <div class="row">
+          <button class="btn" type="button" id="camStart">Start camera</button>
+          <button class="btn ghost" type="button" id="camStop" disabled>Stop</button>
+        </div>
+        <p class="status" id="camStatus" role="status" aria-live="polite">Needs camera permission. Loads about 5 MB the first time.</p>
+        <p class="logh">Detection log</p>
+        <ul class="log" id="log"><li class="empty">No detections yet.</li></ul>
+      </div>
+    </div>
+  </section>
 
-                        </div>
-                
-                    </div>
-                </div>
-            </div>
+  <section class="block" id="experience">
+    <h2>Experience</h2>
+    <ol class="xp" reversed>
+      <li>
+        <time>Jan 2026 – now</time>
+        <div>
+          <h3>Vice President</h3>
+          <p class="org">Carleton AI Society, previously Workshop Lead</p>
+          <ul>
+            <li>Plan and run the society's technical workshop series, and drive its ongoing rebrand.</li>
+            <li>Built and taught workshops on AI history and CNNs, including a hands-on cats vs. dogs PyTorch classifier with a companion Colab notebook.</li>
+            <li>Teach students with mixed technical backgrounds, breaking complex ML topics into approachable explanations.</li>
+          </ul>
         </div>
-        <!-- end portfolio section -->
-        <!-- contact section -->
-        <div id="contactsection" class="sectionblock">
-            
-            <div class="container">
-                <center>
-                    <div class="col-lg-10 pr-lg-5">
-                        <div class="contactdetail">
-                            <center>
-                            <h3 style="margin: 150px;" class="contactdetail__title mb-4">
-                                Let's get intouch!
-                            </h3>    
-                            </center>
-                            
-            <p class = "cool_effect">To contact me, you can send an email at <a href="mailto:marcaoun10@gmail.com"> marcaoun10@gmail.com</a>. I make sure to check my emails daily, so you can expect a prompt response from me. If you have a more urgent matter or prefer to chat, you can also give me a call at 613-869-4608. I am always happy to hear from potential employers who might be interested to work with me. </p>
-                Additionally, you can find me on LinkedIn at: <a  target = "_blank" href="https://www.linkedin.com/in/marc-aoun-263b981ab/"> https://www.linkedin.com/in/marc-aoun-263b981ab/ </a> 
-            </center>
-                            
+      </li>
+      <li>
+        <time>May – Aug 2025</time>
+        <div>
+          <h3>IT Technician</h3>
+          <p class="org">InHouse Support</p>
+          <ul>
+            <li>Imaged and deployed client workstations on-site, standardizing OS builds, drivers, and software across each rollout.</li>
+            <li>Configured network hardware and traced connectivity faults from the router and switch down to the endpoint.</li>
+            <li>Repaired and replaced hardware, restoring failed machines and migrating user data with minimal downtime.</li>
+          </ul>
         </div>
-    </footer>
-    <!-- end footer section-->
-    <!-- keen slider -->
-    <script src="./javascript/vendor/keen-slider.js"></script>
-    <!-- glightbox -->
-    <script src="./javascript/vendor/glightbox.js"></script>
-    <!-- shufle -->
-    <script src="./javascript/vendor/shufle.js"></script>
-    <!-- script -->
-    <script src="./javascript/main.js"></script>
+      </li>
+      <li>
+        <time>May – Aug 2024</time>
+        <div>
+          <h3>IT Technician</h3>
+          <p class="org">Federal Government of Canada</p>
+          <ul>
+            <li>Imaged, configured, and deployed workstations and mobile devices for 50+ employees through a ticket queue, triaging by impact.</li>
+            <li>Diagnosed OS, hardware, and network issues across Windows and macOS endpoints.</li>
+            <li>Documented fixes and walked staff through them in English and French, cutting repeat tickets.</li>
+          </ul>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <section class="block" id="about">
+    <h2>About</h2>
+    <div class="about">
+      <figure class="face">
+        <img src="asset/hero/Selfie.jpg" alt="Marc Aoun" loading="lazy" width="480" height="600">
+        <div class="detect" aria-hidden="true"><i></i><i></i><i></i><i></i><span class="tag">match: marc_aoun 0.99</span></div>
+      </figure>
+      <div class="about-text">
+        <p>I'm a software engineering student at Carleton with a math minor. Most of what I build lately sits where machine learning meets hardware: cameras, Raspberry Pis, and models that have to run on something small.</p>
+        <p>I got into programming making games, spent two summers doing IT where I learned to fix things fast while someone watches, and now I teach AI workshops for the Carleton AI Society.</p>
+        <dl class="facts">
+          <div><dt>Education</dt><dd>BEng Software Engineering, Carleton University. Math minor. Sep 2022 to Apr 2028.</dd></div>
+          <div><dt>Coursework</dt><dd>Machine Learning, Database Systems, Data Structures, Object-Oriented Programming, Numerical Methods</dd></div>
+          <div><dt>Based in</dt><dd>Ottawa, Canada</dd></div>
+          <div><dt>Speaks</dt><dd>English, French, Arabic</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="toolkit">
+    <h2>Toolkit</h2>
+    <dl class="kit">
+      <div><dt>Languages</dt><dd>Python, Java, C++, C, JavaScript, SQL, Racket, MATLAB, HTML/CSS</dd></div>
+      <div><dt>Frameworks and tools</dt><dd>PyTorch, OpenCV, PyQt5, scikit-learn, Swing, React, Node.js, Git, Linux, Raspberry Pi, Google Colab</dd></div>
+      <div><dt>Areas</dt><dd>Machine learning, computer vision, REST APIs, relational databases, embedded systems</dd></div>
+      <div><dt>Looking for</dt><dd>Internships and co-op roles in ML, computer vision, or software engineering.</dd></div>
+    </dl>
+  </section>
+
+  <section class="block contact" id="contact">
+    <h2>Get in touch</h2>
+    <p class="lead">I check email daily. If you're hiring or want to build something, write to me.</p>
+    <a class="mail" href="mailto:marcaoun10@gmail.com">marcaoun10@gmail.com</a>
+    <div class="row">
+      <button class="btn" type="button" id="copyMail">Copy email</button>
+      <a class="btn ghost" href="Marc_Aoun_Resume.pdf" target="_blank" rel="noopener">View resume</a>
+      <a class="ul" href="https://www.linkedin.com/in/marc-aoun-263b981ab/" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="ul" href="https://github.com/MarcAoun" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <span>Marc Aoun, <span id="yr">2026</span></span>
+  <a href="#top">Back to top</a>
+</footer>
+
+<script>
+/* ---------- small interactions ---------- */
+(() => {
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  // copy email
+  const copyBtn = document.getElementById('copyMail');
+  const EMAIL = 'marcaoun10@gmail.com';
+  copyBtn.addEventListener('click', async () => {
+    let ok = false;
+    try { await navigator.clipboard.writeText(EMAIL); ok = true; }
+    catch (e) {
+      const t = document.createElement('textarea');
+      t.value = EMAIL; t.style.position = 'fixed'; t.style.opacity = '0';
+      document.body.appendChild(t); t.select();
+      try { ok = document.execCommand('copy'); } catch (_) {}
+      t.remove();
+    }
+    copyBtn.textContent = ok ? 'Copied' : 'Copy failed, select the address above';
+    setTimeout(() => { copyBtn.textContent = 'Copy email'; }, 2200);
+  });
+
+  // youtube facade: only loads the player when clicked
+  document.querySelectorAll('.yt').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const f = document.createElement('iframe');
+      f.className = 'yt-frame';
+      f.src = `https://www.youtube-nocookie.com/embed/${btn.dataset.id}?autoplay=1&rel=0`;
+      f.title = btn.getAttribute('aria-label').replace('Play the ', '');
+      f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+      f.allowFullscreen = true;
+      btn.replaceWith(f);
+    });
+  });
+})();
+
+/* ---------- live detector (COCO-SSD, runs locally) ---------- */
+(() => {
+  const stage = document.getElementById('stage');
+  const video = document.getElementById('cam');
+  const canvas = document.getElementById('overlay');
+  const ctx = canvas.getContext('2d');
+  const startBtn = document.getElementById('camStart');
+  const stopBtn = document.getElementById('camStop');
+  const statusEl = document.getElementById('camStatus');
+  const logEl = document.getElementById('log');
+
+  let stream = null, model = null, running = false, loading = false;
+  const lastSeen = new Map();
+  let frames = 0, fpsT = 0, fps = 0;
+
+  function status(msg, err) { statusEl.textContent = msg; statusEl.classList.toggle('err', !!err); }
+
+  function loadScript(src) {
+    return new Promise((res, rej) => {
+      if (document.querySelector(`script[src="${src}"]`)) return res();
+      const s = document.createElement('script');
+      s.src = src; s.async = true;
+      s.onload = res; s.onerror = () => rej(new Error('script'));
+      document.head.appendChild(s);
+    });
+  }
+
+  async function ensureModel() {
+    if (model) return model;
+    status('Loading the model. This takes a few seconds the first time.');
+    await loadScript('https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/dist/tf.min.js');
+    await loadScript('https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd@2.2.3/dist/coco-ssd.min.js');
+    model = await window.cocoSsd.load({ base: 'lite_mobilenet_v2' });
+    return model;
+  }
+
+  function addLog(cls, score) {
+    const empty = logEl.querySelector('.empty');
+    if (empty) empty.remove();
+    const li = document.createElement('li');
+    const t = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    const kind = cls === 'person' ? 'person' : 'other';
+    li.innerHTML = `<time></time><span class="cls ${kind}"></span><span></span>`;
+    li.children[0].textContent = t;
+    li.children[1].textContent = cls;
+    li.children[2].textContent = score.toFixed(2);
+    logEl.prepend(li);
+    while (logEl.children.length > 12) logEl.lastElementChild.remove();
+  }
+
+  function drawPreds(preds) {
+    const W = canvas.width, H = canvas.height;
+    ctx.clearRect(0, 0, W, H);
+    const lw = Math.max(2, W / 320), c = Math.max(12, W / 40);
+    const fs = Math.max(13, Math.round(W / 48));
+    ctx.font = `700 ${fs}px Anybody, "Arial Narrow", sans-serif`;
+    ctx.textBaseline = 'top';
+    preds.forEach(p => {
+      let [x, y, w, h] = p.bbox;
+      x = W - x - w; // video is mirrored, boxes follow it
+      const col = p.class === 'person' ? '#FFE35A' : '#E8337A';
+      ctx.strokeStyle = col; ctx.lineWidth = lw;
+      ctx.beginPath();
+      ctx.moveTo(x, y + c); ctx.lineTo(x, y); ctx.lineTo(x + c, y);
+      ctx.moveTo(x + w - c, y); ctx.lineTo(x + w, y); ctx.lineTo(x + w, y + c);
+      ctx.moveTo(x + w, y + h - c); ctx.lineTo(x + w, y + h); ctx.lineTo(x + w - c, y + h);
+      ctx.moveTo(x + c, y + h); ctx.lineTo(x, y + h); ctx.lineTo(x, y + h - c);
+      ctx.stroke();
+      ctx.globalAlpha = 0.12; ctx.fillStyle = col; ctx.fillRect(x, y, w, h); ctx.globalAlpha = 1;
+      const label = `${p.class} ${p.score.toFixed(2)}`;
+      const tw = ctx.measureText(label).width + fs * 0.8, th = fs * 1.5;
+      const ty = y - th - 4 < 0 ? y + 4 : y - th - 4;
+      ctx.fillStyle = col; ctx.fillRect(x, ty, tw, th);
+      ctx.fillStyle = '#15112E'; ctx.fillText(label, x + fs * 0.4, ty + fs * 0.25);
+    });
+    // fps in the corner
+    ctx.font = `700 ${Math.max(12, Math.round(W / 60))}px Anybody, sans-serif`;
+    ctx.fillStyle = 'rgba(238,234,248,.8)';
+    ctx.textBaseline = 'bottom';
+    ctx.fillText(`${fps} fps  ${preds.length} object${preds.length === 1 ? '' : 's'}`, 24, H - 20);
+  }
+
+  async function loop() {
+    if (!running) return;
+    if (document.hidden || video.readyState < 2) { requestAnimationFrame(loop); return; }
+    let preds = [];
+    try { preds = await model.detect(video, 10, 0.55); } catch (e) { /* skip frame */ }
+    if (!running) return;
+    const now = performance.now();
+    preds.forEach(p => {
+      const prev = lastSeen.get(p.class);
+      if (!prev || now - prev > 3000) addLog(p.class, p.score);
+      lastSeen.set(p.class, now);
+    });
+    frames++;
+    if (now - fpsT > 1000) { fps = Math.round(frames * 1000 / (now - fpsT)); frames = 0; fpsT = now; }
+    drawPreds(preds);
+    requestAnimationFrame(loop);
+  }
+
+  async function start() {
+    if (running || loading) return;
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+      status('This browser does not support camera access. Try Chrome, Edge, Safari, or Firefox.', true);
+      return;
+    }
+    loading = true; startBtn.disabled = true;
+    status('Asking for camera access.');
+    try {
+      stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user', width: { ideal: 960 }, height: { ideal: 540 } }, audio: false });
+    } catch (e) {
+      status('Camera access was blocked. Allow it in your browser settings for this site, then press Start camera again.', true);
+      loading = false; startBtn.disabled = false; return;
+    }
+    video.srcObject = stream;
+    try { await video.play(); } catch (e) {}
+    await new Promise(r => video.readyState >= 1 ? r() : video.addEventListener('loadedmetadata', r, { once: true }));
+    const vw = video.videoWidth || 960, vh = video.videoHeight || 540;
+    stage.style.aspectRatio = `${vw} / ${vh}`;
+    canvas.width = vw; canvas.height = vh;
+    stage.classList.add('live');
+    stopBtn.disabled = false;
+    try {
+      await ensureModel();
+    } catch (e) {
+      status('The model could not load. Check your connection and press Start camera again.', true);
+      stop(true); loading = false; return;
+    }
+    loading = false;
+    running = true; fpsT = performance.now(); frames = 0;
+    status('Running. Everything is processed on your device.');
+    loop();
+  }
+
+  function stop(keepStatus) {
+    running = false;
+    if (stream) { stream.getTracks().forEach(t => t.stop()); stream = null; }
+    video.srcObject = null;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    stage.classList.remove('live');
+    startBtn.disabled = false; stopBtn.disabled = true;
+    if (keepStatus !== true) status('Camera is off.');
+  }
+
+  startBtn.addEventListener('click', start);
+  stopBtn.addEventListener('click', () => stop());
+  window.addEventListener('pagehide', () => stop(true));
+})();
+
+/* ---------- hero particle field ---------- */
+(() => {
+  const hero = document.querySelector('.hero');
+  const canvas = document.getElementById('field');
+  const ctx = canvas.getContext('2d');
+  const box = document.getElementById('heroBox');
+  const tag = box.querySelector('.tag');
+  const fpsEl = document.getElementById('fps');
+  const ptsEl = document.getElementById('pts');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const RAMP = [[21,17,46],[75,60,240],[155,47,208],[232,51,122],[255,138,42],[255,227,90],[255,255,255]];
+  const BINS = 24;
+  const COLORS = [];
+  for (let b = 0; b < BINS; b++) {
+    const t = 0.17 + (b / (BINS - 1)) * 0.83;
+    const p = t * (RAMP.length - 1), i = Math.min(RAMP.length - 2, Math.floor(p)), f = p - i;
+    const c = RAMP[i].map((v, k) => Math.round(v + (RAMP[i + 1][k] - v) * f));
+    COLORS.push(`rgb(${c[0]},${c[1]},${c[2]})`);
+  }
+
+  let W = 0, H = 0, N = 0, gap = 4, dot = 2.5;
+  let hx, hy, x, y, vx, vy, heat, order, binStart, binCount;
+  let bbox = {x: 0, y: 0, w: 0, h: 0};
+  let built = false, introT = 0, lastW = 0, lastH = 0;
+
+  const ptr = {x: -9999, y: -9999, vx: 0, vy: 0, active: false, last: 0, pointerType: 'mouse'};
+  const bx = {x: 0, y: 0, w: 0, h: 0, init: false};
+  let sweepX = -1, sweepNext = 0, sweeping = false;
+  let conf = 0.99, confT = 0;
+
+  function setFont(o, size, stretch) {
+    o.font = `900 ${size}px Anybody, "Arial Black", Impact, sans-serif`;
+    if (stretch) o.font = `900 ${stretch} ${size}px Anybody, "Arial Black", Impact, sans-serif`;
+  }
+
+  function build(scatter) {
+    const r = hero.getBoundingClientRect();
+    W = r.width; H = r.height; lastW = W; lastH = H;
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.width = Math.round(W * dpr);
+    canvas.height = Math.round(H * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    const narrow = W < 720;
+    const lines = narrow ? ['MARC', 'AOUN'] : ['MARC AOUN'];
+    const stretch = narrow ? 'semi-expanded' : 'expanded';
+    const off = document.createElement('canvas');
+    off.width = Math.ceil(W); off.height = Math.ceil(H);
+    const o = off.getContext('2d', {willReadFrequently: true});
+
+    let size = 100;
+    setFont(o, size, stretch);
+    const widest = Math.max(...lines.map(l => o.measureText(l).width));
+    const lh = 0.9;
+    size = Math.min(size * (W * (narrow ? 0.84 : 0.9)) / widest, (H * (narrow ? 0.44 : 0.4)) / (lines.length * lh));
+    setFont(o, size, stretch);
+    o.fillStyle = '#fff'; o.textAlign = 'center'; o.textBaseline = 'middle';
+    const cy = H * (narrow ? 0.34 : 0.4);
+    const total = lines.length * size * lh;
+    lines.forEach((l, i) => o.fillText(l, W / 2, cy - total / 2 + size * lh * (i + 0.5)));
+    const data = o.getImageData(0, 0, off.width, off.height).data;
+
+    gap = Math.max(3, Math.round(size / 46));
+    let pts;
+    for (;;) {
+      pts = [];
+      for (let yy = 0; yy < off.height; yy += gap)
+        for (let xx = 0; xx < off.width; xx += gap)
+          if (data[(yy * off.width + xx) * 4 + 3] > 140) pts.push(xx, yy);
+      if (pts.length / 2 <= 9000) break;
+      gap++;
+    }
+    dot = Math.max(1.6, gap * 0.62);
+    N = pts.length / 2;
+    hx = new Float32Array(N); hy = new Float32Array(N);
+    x = new Float32Array(N); y = new Float32Array(N);
+    vx = new Float32Array(N); vy = new Float32Array(N);
+    heat = new Float32Array(N);
+    order = new Uint32Array(N);
+    binStart = new Uint32Array(BINS); binCount = new Uint32Array(BINS);
+
+    let x0 = 1e9, y0 = 1e9, x1 = -1e9, y1 = -1e9;
+    for (let i = 0; i < N; i++) {
+      const px = pts[i * 2], py = pts[i * 2 + 1];
+      hx[i] = px; hy[i] = py;
+      if (px < x0) x0 = px; if (px > x1) x1 = px;
+      if (py < y0) y0 = py; if (py > y1) y1 = py;
+      if (scatter) {
+        const a = Math.random() * Math.PI * 2, d = Math.max(W, H) * (0.3 + Math.random() * 0.7);
+        x[i] = W / 2 + Math.cos(a) * d; y[i] = H / 2 + Math.sin(a) * d;
+        heat[i] = 1;
+      } else { x[i] = px; y[i] = py; }
+    }
+    const pad = Math.max(14, gap * 3);
+    bbox = {x: x0 - pad, y: y0 - pad, w: x1 - x0 + pad * 2, h: y1 - y0 + pad * 2};
+    ptsEl.textContent = N.toLocaleString() + ' points';
+    built = true;
+    if (!scatter) introT = 1;
+  }
+
+  function step() {
+    const k = 0.012 + 0.05 * Math.min(1, introT);
+    const R = Math.max(90, Math.min(W, H) * 0.17), R2 = R * R;
+    const pa = ptr.active;
+    const pvx = ptr.vx * 0.22, pvy = ptr.vy * 0.22;
+    for (let i = 0; i < N; i++) {
+      const px = x[i], py = y[i];
+      let ax = (hx[i] - px) * k, ay = (hy[i] - py) * k;
+      let h = heat[i] * 0.955;
+      if (pa) {
+        const dx = px - ptr.x, dy = py - ptr.y, d2 = dx * dx + dy * dy;
+        if (d2 < R2) {
+          const d = Math.sqrt(d2) || 1, f = 1 - d / R;
+          ax += (dx / d) * f * 6 + pvx * f;
+          ay += (dy / d) * f * 6 + pvy * f;
+          if (f > h) h = f;
+        }
+      }
+      if (sweeping) {
+        const ds = Math.abs(px - sweepX);
+        if (ds < 22) { const s = (1 - ds / 22) * 0.8; if (s > h) h = s; }
+      }
+      const nvx = (vx[i] + ax) * 0.8, nvy = (vy[i] + ay) * 0.8;
+      vx[i] = nvx; vy[i] = nvy;
+      x[i] = px + nvx; y[i] = py + nvy;
+      heat[i] = h;
+    }
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    binCount.fill(0);
+    const bin = (h) => Math.min(BINS - 1, (h * BINS) | 0);
+    for (let i = 0; i < N; i++) binCount[bin(heat[i])]++;
+    let acc = 0;
+    for (let b = 0; b < BINS; b++) { binStart[b] = acc; acc += binCount[b]; }
+    const fill = binStart.slice();
+    for (let i = 0; i < N; i++) order[fill[bin(heat[i])]++] = i;
+    for (let b = 0; b < BINS; b++) {
+      if (!binCount[b]) continue;
+      const s = dot * (1 + (b / BINS) * 0.55), hs = s / 2;
+      ctx.fillStyle = COLORS[b];
+      ctx.beginPath();
+      const end = binStart[b] + binCount[b];
+      for (let j = binStart[b]; j < end; j++) { const i = order[j]; ctx.rect(x[i] - hs, y[i] - hs, s, s); }
+      ctx.fill();
+    }
+  }
+
+  function updateBox(now) {
+    const inside = ptr.active && ptr.x > bbox.x && ptr.x < bbox.x + bbox.w && ptr.y > bbox.y && ptr.y < bbox.y + bbox.h;
+    let t;
+    if (!ptr.active || inside) {
+      t = bbox;
+      if (now > confT) { conf = 0.96 + Math.random() * 0.035; confT = now + 450; }
+      tag.textContent = 'marc_aoun ' + conf.toFixed(2);
+    } else {
+      const s = 150;
+      t = {x: ptr.x - s / 2, y: ptr.y - s / 2, w: s, h: s};
+      tag.textContent = 'scanning x' + Math.round(ptr.x) + ' y' + Math.round(ptr.y);
+    }
+    if (!bx.init) { Object.assign(bx, t); bx.init = true; }
+    const e = 0.16;
+    bx.x += (t.x - bx.x) * e; bx.y += (t.y - bx.y) * e;
+    bx.w += (t.w - bx.w) * e; bx.h += (t.h - bx.h) * e;
+    box.style.transform = `translate(${bx.x}px,${bx.y}px)`;
+    box.style.width = bx.w + 'px';
+    box.style.height = bx.h + 'px';
+  }
+
+  function setPtr(e) {
+    const r = canvas.getBoundingClientRect();
+    const nx = e.clientX - r.left, ny = e.clientY - r.top;
+    if (ptr.active) { ptr.vx = nx - ptr.x; ptr.vy = ny - ptr.y; } else { ptr.vx = ptr.vy = 0; }
+    ptr.x = nx; ptr.y = ny; ptr.active = true; ptr.last = performance.now();
+  }
+  function dropPtr() { ptr.active = false; ptr.vx = ptr.vy = 0; }
+
+  let running = false, visible = true, last = performance.now(), frames = 0, fpsT = last;
+  function frame(now) {
+    if (!visible) { running = false; return; }
+    const dt = Math.min(64, now - last); last = now;
+    if (introT < 1) introT = Math.min(1, introT + dt / 1400);
+    if (ptr.active && now - ptr.last > 2200 && ptr.pointerType !== 'mouse') dropPtr();
+    ptr.vx *= 0.85; ptr.vy *= 0.85;
+
+    const idle = !ptr.active && introT >= 1;
+    if (idle && !sweeping && now > sweepNext) { sweeping = true; sweepX = bbox.x - 40; }
+    if (sweeping) {
+      sweepX += (bbox.w + 80) * dt / 2400;
+      if (sweepX > bbox.x + bbox.w + 40 || !idle) { sweeping = false; sweepNext = now + 3200; }
+    }
+
+    step(); draw(); updateBox(now);
+
+    frames++;
+    if (now - fpsT > 500) { fpsEl.textContent = Math.round(frames * 1000 / (now - fpsT)) + ' fps'; frames = 0; fpsT = now; }
+    requestAnimationFrame(frame);
+  }
+  function start() {
+    if (running || reduce) return;
+    running = true; last = performance.now();
+    requestAnimationFrame(frame);
+  }
+
+  function staticRender() {
+    draw();
+    box.style.transform = `translate(${bbox.x}px,${bbox.y}px)`;
+    box.style.width = bbox.w + 'px'; box.style.height = bbox.h + 'px';
+    box.classList.add('on');
+    fpsEl.textContent = 'still';
+  }
+
+  const fontReady = document.fonts
+    ? Promise.race([document.fonts.load('900 100px Anybody'), new Promise(r => setTimeout(r, 2500))])
+    : Promise.resolve();
+
+  fontReady.then(() => {
+    build(!reduce);
+    if (reduce) { staticRender(); return; }
+    sweepNext = performance.now() + 2600;
+    setTimeout(() => box.classList.add('on'), 900);
+    start();
+
+    hero.addEventListener('pointermove', e => { ptr.pointerType = e.pointerType; setPtr(e); });
+    hero.addEventListener('pointerdown', e => { ptr.pointerType = e.pointerType; setPtr(e); });
+    hero.addEventListener('pointerleave', dropPtr);
+    hero.addEventListener('pointercancel', dropPtr);
+    hero.addEventListener('pointerup', e => { if (e.pointerType !== 'mouse') setTimeout(dropPtr, 600); });
+
+    new IntersectionObserver(([en]) => { visible = en.isIntersecting; if (visible) start(); }).observe(hero);
+  });
+
+  let rt;
+  window.addEventListener('resize', () => {
+    clearTimeout(rt);
+    rt = setTimeout(() => {
+      if (!built) return;
+      const r = hero.getBoundingClientRect();
+      if (Math.abs(r.width - lastW) < 2 && Math.abs(r.height - lastH) < 120) return;
+      build(false);
+      bx.init = false;
+      if (reduce) staticRender();
+    }, 150);
+  });
+})();
+</script>
 </body>
-
 </html>

@@ -129,30 +129,6 @@ img{max-width:100%}
 .yt .play::before{content:"";width:0;height:0;border-left:.7em solid currentColor;border-top:.42em solid transparent;border-bottom:.42em solid transparent}
 .yt-frame{display:block;width:100%;aspect-ratio:16/9;border:0;margin:0 0 1.25rem;background:#000}
 
-/* demo */
-.demo{display:grid;grid-template-columns:minmax(0,8fr) minmax(0,4fr);gap:clamp(1.5rem,3vw,2.5rem);align-items:start}
-.stage{position:relative;aspect-ratio:16/9;background:var(--ink-2);overflow:hidden}
-.stage video,.stage canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
-.stage video{transform:scaleX(-1);object-fit:cover}
-.stage .frame{opacity:1;inset:14px;width:auto;height:auto;left:14px;top:14px;right:14px;bottom:14px}
-.stage .frame i{border-color:var(--line)}
-.stage.live .frame i{border-color:var(--hot)}
-.idle{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:2rem;color:var(--mute)}
-.idle strong{display:block;font-family:var(--display);font-weight:800;font-variation-settings:"wdth" 115;font-size:clamp(1.3rem,2.5vw,1.9rem);color:var(--paper);line-height:1.1;margin-bottom:.4rem}
-.stage.live .idle{display:none}
-.side .row{margin-bottom:1.25rem}
-.status{margin:0 0 1.25rem;color:var(--mute);min-height:1.6em}
-.status.err{color:var(--mag)}
-.logh{font-family:var(--display);font-weight:700;font-variation-settings:"wdth" 110;font-size:1.1rem;margin:0 0 .6rem}
-.log{list-style:none;margin:0;padding:0;border-top:1px solid var(--line);max-height:17rem;overflow:auto}
-.log li{display:grid;grid-template-columns:auto 1fr auto;gap:.75rem;padding:.5rem 0;border-bottom:1px solid var(--line);font-size:.95rem;font-variant-numeric:tabular-nums}
-.log time{color:var(--mute)}
-.log .cls{font-weight:700}
-.log .person{color:var(--hot)}
-.log .other{color:#9D8CFF}
-.log .empty{grid-template-columns:1fr;color:var(--mute)}
-.note{margin:1rem 0 0;color:var(--mute);font-size:.92rem;max-width:46ch}
-
 /* experience */
 .xp{list-style:none;margin:0;padding:0}
 .xp li{display:grid;grid-template-columns:12rem minmax(0,1fr);gap:.5rem 3rem;padding:1.8rem 0;border-top:1px solid var(--line)}
@@ -190,7 +166,7 @@ footer a{text-decoration:none}
 footer a:hover{color:var(--hot)}
 
 @media (max-width:900px){
-  .project,.about,.xp li,.demo{grid-template-columns:1fr}
+  .project,.about,.xp li{grid-template-columns:1fr}
   .now{grid-template-columns:1fr}
   .xp li{gap:.25rem}
   .face{max-width:380px;margin-top:0}
@@ -225,7 +201,6 @@ footer a:hover{color:var(--hot)}
   <a class="brand" href="#top">Marc Aoun</a>
   <ul>
     <li><a href="#work">Work</a></li>
-    <li class="opt"><a href="#demo">Demo</a></li>
     <li class="opt"><a href="#experience">Experience</a></li>
     <li class="opt"><a href="#about">About</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -241,7 +216,7 @@ footer a:hover{color:var(--hot)}
     <div>
       <p>Software engineering student at Carleton University, building computer vision and machine learning systems that run on small hardware.</p>
       <div class="row">
-        <a class="btn" href="#demo">Try the live detector</a>
+        <a class="btn" href="#work">See my work</a>
         <a class="btn ghost" href="Marc_Aoun_Resume.pdf" download>Download resume</a>
       </div>
     </div>
@@ -292,7 +267,6 @@ footer a:hover{color:var(--hot)}
         </ul>
         <div class="row">
           <a class="btn" href="https://github.com/MarcAoun/sentinel_ai" target="_blank" rel="noopener">View the code</a>
-          <a class="btn ghost" href="#demo">Try detection in your browser</a>
         </div>
       </div>
       <div class="gallery">
@@ -372,28 +346,6 @@ footer a:hover{color:var(--hot)}
     </article>
   </section>
 
-  <section class="block" id="demo">
-    <h2>Live detector</h2>
-    <p class="intro">The same idea behind Sentinel AI, running in your browser. It uses COCO-SSD, a small object detection model, on your webcam. Nothing is uploaded; every frame stays on your device.</p>
-    <div class="demo">
-      <div class="stage" id="stage">
-        <video id="cam" playsinline muted></video>
-        <canvas id="overlay"></canvas>
-        <div class="detect frame" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-        <div class="idle"><div><strong>Camera is off</strong>Start the camera to see what the model picks up. Try holding up a phone, cup, or book.</div></div>
-      </div>
-      <div class="side">
-        <div class="row">
-          <button class="btn" type="button" id="camStart">Start camera</button>
-          <button class="btn ghost" type="button" id="camStop" disabled>Stop</button>
-        </div>
-        <p class="status" id="camStatus" role="status" aria-live="polite">Needs camera permission. Loads about 5 MB the first time.</p>
-        <p class="logh">Detection log</p>
-        <ul class="log" id="log"><li class="empty">No detections yet.</li></ul>
-      </div>
-    </div>
-  </section>
-
   <section class="block" id="experience">
     <h2>Experience</h2>
     <ol class="xp" reversed>
@@ -445,7 +397,6 @@ footer a:hover{color:var(--hot)}
       </figure>
       <div class="about-text">
         <p>I'm a software engineering student at Carleton with a math minor. Most of what I build lately sits where machine learning meets hardware: cameras, Raspberry Pis, and models that have to run on something small.</p>
-        <p>I got into programming making games, spent two summers doing IT where I learned to fix things fast while someone watches, and now I teach AI workshops for the Carleton AI Society.</p>
         <dl class="facts">
           <div><dt>Education</dt><dd>BEng Software Engineering, Carleton University. Math minor. Sep 2022 to Apr 2028.</dd></div>
           <div><dt>Coursework</dt><dd>Machine Learning, Database Systems, Data Structures, Object-Oriented Programming, Numerical Methods</dd></div>
@@ -518,155 +469,6 @@ footer a:hover{color:var(--hot)}
       btn.replaceWith(f);
     });
   });
-})();
-
-/* ---------- live detector (COCO-SSD, runs locally) ---------- */
-(() => {
-  const stage = document.getElementById('stage');
-  const video = document.getElementById('cam');
-  const canvas = document.getElementById('overlay');
-  const ctx = canvas.getContext('2d');
-  const startBtn = document.getElementById('camStart');
-  const stopBtn = document.getElementById('camStop');
-  const statusEl = document.getElementById('camStatus');
-  const logEl = document.getElementById('log');
-
-  let stream = null, model = null, running = false, loading = false;
-  const lastSeen = new Map();
-  let frames = 0, fpsT = 0, fps = 0;
-
-  function status(msg, err) { statusEl.textContent = msg; statusEl.classList.toggle('err', !!err); }
-
-  function loadScript(src) {
-    return new Promise((res, rej) => {
-      if (document.querySelector(`script[src="${src}"]`)) return res();
-      const s = document.createElement('script');
-      s.src = src; s.async = true;
-      s.onload = res; s.onerror = () => rej(new Error('script'));
-      document.head.appendChild(s);
-    });
-  }
-
-  async function ensureModel() {
-    if (model) return model;
-    status('Loading the model. This takes a few seconds the first time.');
-    await loadScript('https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/dist/tf.min.js');
-    await loadScript('https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd@2.2.3/dist/coco-ssd.min.js');
-    model = await window.cocoSsd.load({ base: 'lite_mobilenet_v2' });
-    return model;
-  }
-
-  function addLog(cls, score) {
-    const empty = logEl.querySelector('.empty');
-    if (empty) empty.remove();
-    const li = document.createElement('li');
-    const t = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-    const kind = cls === 'person' ? 'person' : 'other';
-    li.innerHTML = `<time></time><span class="cls ${kind}"></span><span></span>`;
-    li.children[0].textContent = t;
-    li.children[1].textContent = cls;
-    li.children[2].textContent = score.toFixed(2);
-    logEl.prepend(li);
-    while (logEl.children.length > 12) logEl.lastElementChild.remove();
-  }
-
-  function drawPreds(preds) {
-    const W = canvas.width, H = canvas.height;
-    ctx.clearRect(0, 0, W, H);
-    const lw = Math.max(2, W / 320), c = Math.max(12, W / 40);
-    const fs = Math.max(13, Math.round(W / 48));
-    ctx.font = `700 ${fs}px Anybody, "Arial Narrow", sans-serif`;
-    ctx.textBaseline = 'top';
-    preds.forEach(p => {
-      let [x, y, w, h] = p.bbox;
-      x = W - x - w; // video is mirrored, boxes follow it
-      const col = p.class === 'person' ? '#FFE35A' : '#E8337A';
-      ctx.strokeStyle = col; ctx.lineWidth = lw;
-      ctx.beginPath();
-      ctx.moveTo(x, y + c); ctx.lineTo(x, y); ctx.lineTo(x + c, y);
-      ctx.moveTo(x + w - c, y); ctx.lineTo(x + w, y); ctx.lineTo(x + w, y + c);
-      ctx.moveTo(x + w, y + h - c); ctx.lineTo(x + w, y + h); ctx.lineTo(x + w - c, y + h);
-      ctx.moveTo(x + c, y + h); ctx.lineTo(x, y + h); ctx.lineTo(x, y + h - c);
-      ctx.stroke();
-      ctx.globalAlpha = 0.12; ctx.fillStyle = col; ctx.fillRect(x, y, w, h); ctx.globalAlpha = 1;
-      const label = `${p.class} ${p.score.toFixed(2)}`;
-      const tw = ctx.measureText(label).width + fs * 0.8, th = fs * 1.5;
-      const ty = y - th - 4 < 0 ? y + 4 : y - th - 4;
-      ctx.fillStyle = col; ctx.fillRect(x, ty, tw, th);
-      ctx.fillStyle = '#15112E'; ctx.fillText(label, x + fs * 0.4, ty + fs * 0.25);
-    });
-    // fps in the corner
-    ctx.font = `700 ${Math.max(12, Math.round(W / 60))}px Anybody, sans-serif`;
-    ctx.fillStyle = 'rgba(238,234,248,.8)';
-    ctx.textBaseline = 'bottom';
-    ctx.fillText(`${fps} fps  ${preds.length} object${preds.length === 1 ? '' : 's'}`, 24, H - 20);
-  }
-
-  async function loop() {
-    if (!running) return;
-    if (document.hidden || video.readyState < 2) { requestAnimationFrame(loop); return; }
-    let preds = [];
-    try { preds = await model.detect(video, 10, 0.55); } catch (e) { /* skip frame */ }
-    if (!running) return;
-    const now = performance.now();
-    preds.forEach(p => {
-      const prev = lastSeen.get(p.class);
-      if (!prev || now - prev > 3000) addLog(p.class, p.score);
-      lastSeen.set(p.class, now);
-    });
-    frames++;
-    if (now - fpsT > 1000) { fps = Math.round(frames * 1000 / (now - fpsT)); frames = 0; fpsT = now; }
-    drawPreds(preds);
-    requestAnimationFrame(loop);
-  }
-
-  async function start() {
-    if (running || loading) return;
-    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-      status('This browser does not support camera access. Try Chrome, Edge, Safari, or Firefox.', true);
-      return;
-    }
-    loading = true; startBtn.disabled = true;
-    status('Asking for camera access.');
-    try {
-      stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user', width: { ideal: 960 }, height: { ideal: 540 } }, audio: false });
-    } catch (e) {
-      status('Camera access was blocked. Allow it in your browser settings for this site, then press Start camera again.', true);
-      loading = false; startBtn.disabled = false; return;
-    }
-    video.srcObject = stream;
-    try { await video.play(); } catch (e) {}
-    await new Promise(r => video.readyState >= 1 ? r() : video.addEventListener('loadedmetadata', r, { once: true }));
-    const vw = video.videoWidth || 960, vh = video.videoHeight || 540;
-    stage.style.aspectRatio = `${vw} / ${vh}`;
-    canvas.width = vw; canvas.height = vh;
-    stage.classList.add('live');
-    stopBtn.disabled = false;
-    try {
-      await ensureModel();
-    } catch (e) {
-      status('The model could not load. Check your connection and press Start camera again.', true);
-      stop(true); loading = false; return;
-    }
-    loading = false;
-    running = true; fpsT = performance.now(); frames = 0;
-    status('Running. Everything is processed on your device.');
-    loop();
-  }
-
-  function stop(keepStatus) {
-    running = false;
-    if (stream) { stream.getTracks().forEach(t => t.stop()); stream = null; }
-    video.srcObject = null;
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    stage.classList.remove('live');
-    startBtn.disabled = false; stopBtn.disabled = true;
-    if (keepStatus !== true) status('Camera is off.');
-  }
-
-  startBtn.addEventListener('click', start);
-  stopBtn.addEventListener('click', () => stop());
-  window.addEventListener('pagehide', () => stop(true));
 })();
 
 /* ---------- hero particle field ---------- */
